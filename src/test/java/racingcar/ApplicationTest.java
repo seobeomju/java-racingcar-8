@@ -15,21 +15,78 @@ class ApplicationTest extends NsTest {
     @Test
     void 기능_테스트() {
         assertRandomNumberInRangeTest(
-            () -> {
-                run("pobi,woni", "1");
-                assertThat(output()).contains("pobi : -", "woni : ", "최종 우승자 : pobi");
-            },
-            MOVING_FORWARD, STOP
+                () -> {
+                    run("pobi,woni", "1");
+                    assertThat(output()).contains("pobi : -", "woni : ", "최종 우승자 : pobi");
+                },
+                MOVING_FORWARD, STOP
         );
     }
 
-//    @Test
-//    void 예외_테스트() {
-//        assertSimpleTest(() ->
-//            assertThatThrownBy(() -> runException("pobi,javaji", "1"))
-//                .isInstanceOf(IllegalArgumentException.class)
-//        );
-//    }
+    @Test
+    void 입력_예외_테스트_빈_입력() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(" ", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+
+        );
+    }
+
+    @Test
+    void 입력_예외_테스트_빈_토큰1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("pobi,,woni", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 입력_예외_테스트_빈_토큰2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("pobi,woni,", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 입력_예외_테스트_빈_토큰3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run(",woni", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 입력_예외_테스트_입력_길이(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("pobi,seoboemju", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 입력_예외_태스트_숫자_형식(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("pobi,woni", "one"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 입력_예외_테스트_숫자_범위(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("pobi,woni", "-1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("pobi,javaji", "1"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
     @Override
     public void runMain() {
