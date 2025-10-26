@@ -65,6 +65,23 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 입력_예외_테스트_입력_공백(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("pobi,wo ni", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
+    @Test
+    void 입력_예외_테스트_입력_중복(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("pobi,pobi,woni", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 입력_예외_태스트_숫자_형식(){
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> run("pobi,woni", "one"))
