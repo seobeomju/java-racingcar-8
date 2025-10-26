@@ -13,7 +13,7 @@ public class Application {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String input = Console.readLine();
 
-        if (!Validator.stringCheck(input)) {
+        if (!Validator.isnNotBlankInput(input)) {
             throw new IllegalArgumentException("자동차 이름이 비어있습니다");
         }
 
@@ -21,18 +21,16 @@ public class Application {
                 .map(String::trim)
                 .toList();
 
-        if (!Validator.carNameCheck(carNames)) {
-            throw new IllegalArgumentException("자동차 이름 입력 방식이 잘못되었습니다.");
-        }
+        Validator.validateCarNames(carNames);
 
         System.out.println("시도할 횟수는 몇 회인가요?");
         int count;
         try {
-            count = Integer.parseInt(Console.readLine());
+            count = Integer.parseInt(Console.readLine().trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("시도 횟수는 양의 정수여야 합니다.");
         }
-        if(!Validator.checkCount(count)) {
+        if (!Validator.isValidTryCount(count)) {
             throw new IllegalArgumentException("시도 횟수는 1 이상이어야 합니다.");
         }
 
