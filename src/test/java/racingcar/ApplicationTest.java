@@ -35,7 +35,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 입력_예외_테스트_빈_토큰1() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> run("pobi,,woni", "1"))
+                assertThatThrownBy(() -> runException("pobi,,woni", "1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -43,7 +43,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 입력_예외_테스트_빈_토큰2() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> run("pobi,woni,", "1"))
+                assertThatThrownBy(() -> runException("pobi,woni,", "1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -51,48 +51,48 @@ class ApplicationTest extends NsTest {
     @Test
     void 입력_예외_테스트_빈_토큰3() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> run(",woni", "1"))
+                assertThatThrownBy(() -> runException(",woni", "1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
     @Test
-    void 입력_예외_테스트_입력_길이(){
+    void 입력_예외_테스트_입력_길이() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> run("pobi,seoboemju", "1"))
+                assertThatThrownBy(() -> runException("pobi,seoboemju", "1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
     @Test
-    void 입력_예외_테스트_입력_공백(){
+    void 입력_예외_테스트_입력_공백() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> run("pobi,wo ni", "1"))
+                assertThatThrownBy(() -> runException("pobi,wo ni", "1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
 
     @Test
-    void 입력_예외_테스트_입력_중복(){
+    void 입력_예외_테스트_입력_중복() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> run("pobi,pobi,woni", "1"))
+                assertThatThrownBy(() -> runException("pobi,pobi,woni", "1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
     @Test
-    void 입력_예외_태스트_숫자_형식(){
+    void 입력_예외_테스트_숫자_형식() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> run("pobi,woni", "one"))
+                assertThatThrownBy(() -> runException("pobi,woni", "one"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
     @Test
-    void 입력_예외_테스트_숫자_범위(){
+    void 입력_예외_테스트_숫자_범위() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> run("pobi,woni", "-1"))
+                assertThatThrownBy(() -> runException("pobi,woni", "-1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -100,8 +100,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("pobi,javaji", "1"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("pobi,javaji", "1"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
