@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Validator {
 
-    public static boolean isnNotBlankInput(String input) {
+    public static boolean isNotBlankInput(String input) {
         return input != null && !input.trim().isEmpty();
     }
 
